@@ -1,4 +1,4 @@
-//import [dotenv] modules;
+//import [dotenv] modules and .env config;
 require('dotenv').config();
 
 //import [express] modules;
@@ -12,7 +12,14 @@ app.get('/', (req, res) => {
     res.send(`<h1>Hello</h1>`);
 });
 
+/*
+app.get('/a.html',(req,res) => {
+    res.send(`<h1>false a.html</h1>`)
+})
+*/
+
 //use express to import file ['public'];
+//put last place
 app.use(express.static('public'));
 
 //set error routes; 
@@ -20,7 +27,7 @@ app.use(express.static('public'));
 //this routes [.use()] souled be any routes last;
 app.use((req, res) => {
     res.type('text/plain');
-    res.status(404).send(`ERROR!`);
+    res.status(404).send(`404 ERROR!`);
 });
 
 //import process.env config => PORT;
