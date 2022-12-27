@@ -10,7 +10,15 @@ const app = express();
 //set routes;
 app.get('/', (req, res) => {
     res.send(`<h1>Hello</h1>`);
+});
 
+
+//set error routes; 
+//any routes souled need to be this routes front;
+//this routes [.use()] souled be any routes last;
+app.use((req, res) => {
+    res.type('text/plain');
+    res.status(404).send(`ERROR!`);
 });
 
 //import process.env config => PORT;
