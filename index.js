@@ -12,6 +12,8 @@ app.get('/', (req, res) => {
     res.send(`<h1>Hello</h1>`);
 });
 
+//use express to import file ['public'];
+app.use(express.static('public'));
 
 //set error routes; 
 //any routes souled need to be this routes front;
