@@ -4,6 +4,13 @@ process
 thread
 => 執行緒
 
+output frondend
+=> {
+    res.send,
+    res.add,
+    res.use
+}
+
 package.json
 => {
     "start" : "file location",
