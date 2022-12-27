@@ -8,16 +8,17 @@ const server = http.createServer(async (req, res) => {
 
     //show require message;
     console.log(`----------`,req.url);
+    res.writeHead(200,{
+        'Content-Type':'text/plain'
+    });
 
     //read file function;
     const result = await fs.readFile(
-        __dirname + '/esm01.html'
+        __dirname + '/header01.txt'
     );
 
-    console.log(result.toString())
-    res.end(`
-        <h2>result : ${result.toString()}</h2>
-    `)
+    console.log(result.toString());
+    res.end(result.toString());
 });
 
 
