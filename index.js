@@ -7,7 +7,7 @@ const express = require('express');
 //use express;
 const app = express();
 //import ejs engine;
-app.set('view engine','ejs');
+app.set('view engine', 'ejs');
 
 
 //set routes;
@@ -17,10 +17,20 @@ app.get('/', (req, res) => {
 });
 */
 
+
+
 //export .ejs object;
 app.get('/', (req, res) => {
-    res.render('main',{name:'Alan'});
+    res.render('main', { name: 'Alan' });
 });
+
+//import /data/sales.json;
+app.get('/json-sales', (req, res) => {
+    const data = require(__dirname + '/data/sales.json');
+
+    res.json(data);
+    // res.render('json-sales');
+})
 
 
 /*---------------------------------
