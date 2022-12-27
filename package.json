@@ -16,8 +16,5 @@
   "bugs": {
     "url": "https://github.com/AlanChou1995/node.js-tutorial/issues"
   },
-  "homepage": "https://github.com/AlanChou1995/node.js-tutorial#readme",
-  "dependencies": {
-    "es-checker": "^1.4.2"
-  }
+  "homepage": "https://github.com/AlanChou1995/node.js-tutorial#readme"
 }
