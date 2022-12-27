@@ -4,11 +4,17 @@ class Person {
         this.age = age;
     }
 
-    //return JSON
+    //return JSON file
     toString() {
         const { name, age } = this;
         return JSON.stringify({ name, age });
     }
 }
 
-module.exports = Person;
+const f2 = a => a*a;
+const f3 =a => a*a*a;
+
+console.log(`This is Person2`);
+
+//output object function
+module.exports = {Person,f2,f3};
