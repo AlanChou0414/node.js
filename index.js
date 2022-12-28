@@ -34,6 +34,11 @@ app.get('/json-sales', (req, res) => {
   res.render('json-sales', { data });
 });
 
+// req.query() get query string parameters;
+app.get('/try-qs', (req, res) => {
+  res.json(req.query);
+});
+
 /*---------------------------------
 app.get('/a.html',(req,res) => {
     res.send(`<h1>false a.html</h1>`)
