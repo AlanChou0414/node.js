@@ -4,6 +4,10 @@ require('dotenv').config();
 
 // import [express] modules;
 const express = require('express');
+// import [multer] nodules;
+const multer = require('multer');
+
+const upload = multer({ dest: 'upload_tmp/' });
 
 // use express;
 const app = express();
@@ -83,6 +87,7 @@ app.post(['/try-post', '/try-post2'], (req, res) => {
   res.json(req.body);
 });
 
+// export try-post-form form data
 app.get('/try-post-form', (req, res) => {
   res.render('try-post-form');
 });
@@ -90,7 +95,10 @@ app.post('/try-post-form', (req, res) => {
   // res.render(req.body);
   res.render('try-post-form', req.body);
 });
-
+// export upload
+app.post('/try-post-form', upload.single('avatar'), (req, res) => {
+  res.json(req.file);
+});
 /*---------------------------------
 app.get('/a.html',(req,res) => {
     res.send(`<h1>false a.html</h1>`)

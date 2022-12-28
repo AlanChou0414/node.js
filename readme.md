@@ -32,4 +32,6 @@ output
 => {
     req.query => get query string parameters
     req.body => get form
+    req.file => upload single file
+    req.files => upload many files
 }
