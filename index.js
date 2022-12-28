@@ -75,6 +75,7 @@ app.get('/try-qs', (req, res) => {
 const urlencodedParser = express.urlencoded({ extended: false });
 const jsonParser = express.json();
 app.post(['/try-post', '/try-post2'], [urlencodedParser, jsonParser], (req, res) => {
+  // body-parser
   res.json(req.body);
 });
 

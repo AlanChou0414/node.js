@@ -31,5 +31,5 @@ output
 }
 => {
     req.query => get query string parameters
-    req.body => get from
+    req.body => get form
 }
