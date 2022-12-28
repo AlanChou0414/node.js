@@ -38,28 +38,32 @@ app.get('/json-sales', (req, res) => {
 app.get('/json-sales2', (req, res) => {
   // eslint-disable-next-line import/no-dynamic-require, global-require
   const data = require(`${__dirname}/data/sales.json`);
-
+  const { orderby } = req.query;
   // create object function;
   const handleObj = {
     name_asc: {
       label: '姓名由小到大',
-      sort: (a, b) => {},
+      sort: (a, b) => (a.name < b.name ? -1 : 1),
     },
     name_desc: {
       label: '姓名由大到小',
-      sort: (a, b) => {},
+      sort: (a, b) => (a.name > b.name ? -1 : 1),
     },
     age_asc: {
       label: '年齡由小到大',
-      sort: (a, b) => {},
+      sort: (a, b) => (a.age < b.age ? -1 : 1),
     },
     age_desc: {
       label: '年齡由大到小',
-      sort: (a, b) => {},
+      sort: (a, b) => (a.age > b.age ? -1 : 1),
     },
   };
+  // if get key => sort;
+  if (handleObj[orderby]) {
+    data.sort(handleObj[orderby].sort);
+  }
 
-  res.render('json-sales2', { data, handleObj });
+  res.render('json-sales2', { data, handleObj, orderby });
 });
 
 // req.query() get query string parameters;
