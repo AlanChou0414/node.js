@@ -100,6 +100,9 @@ app.post('/try-post-form', (req, res) => {
 app.post('/try-upload', upload.single('avatar'), (req, res) => {
   res.json(req.file);
 });
+app.post('/try-uploads', upload.array('photos'), (req, res) => {
+  res.json(req.files);
+});
 /*---------------------------------
 app.get('/a.html',(req,res) => {
     res.send(`<h1>false a.html</h1>`)
