@@ -29,3 +29,7 @@ output
     res.render()
     res.json()
 }
+=> {
+    req.query => get query string parameters
+    req.body => get from
+}

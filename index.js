@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 // export .ejs object;
 app.get('/', (req, res) => {
-  res.render('main', { name: 'Alan' });
+  res.render('main', { sayHello: 'Hello Alan, Nice to see you!' });
 });
 
 // import /data/sales.json;
@@ -69,6 +69,13 @@ app.get('/json-sales2', (req, res) => {
 // req.query() get query string parameters;
 app.get('/try-qs', (req, res) => {
   res.json(req.query);
+});
+
+// post
+const urlencodedParser = express.urlencoded({ extended: false });
+const jsonParser = express.json();
+app.post(['/try-post', '/try-post2'], [urlencodedParser, jsonParser], (req, res) => {
+  res.json(req.body);
 });
 
 /*---------------------------------
