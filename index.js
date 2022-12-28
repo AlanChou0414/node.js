@@ -26,8 +26,12 @@ app.get('/json-sales', (req, res) => {
   // eslint-disable-next-line import/no-dynamic-require, global-require
   const data = require(`${__dirname}/data/sales.json`);
 
-  res.json(data);
-  // res.render('json-sales');
+  console.log(data);
+
+  // res.json(data);
+
+  // output to [json-sales.ejs] {data}
+  res.render('json-sales', { data });
 });
 
 /*---------------------------------

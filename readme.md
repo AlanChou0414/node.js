@@ -21,3 +21,11 @@ package.json
 
 npm i 
 => download all project modules
+
+output
+=>{
+    res.end()
+    res.send()
+    res.render()
+    res.json()
+}
