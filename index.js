@@ -109,6 +109,14 @@ app.get('/my-params1/:action?/:id?', (req, res) => {
   res.json(req.params);
 });
 
+// check phone number;
+app.get(/\/m\/09\d{2}-?\d{3}-?\d{3}$/i, (req, res) => {
+  let u = req.url.slice(3);
+  // u = u.split('?')[0]; // query string;
+  u = u.split('-').join('');
+  res.send({ u });
+});
+
 /*---------------------------------
 app.get('/a.html',(req,res) => {
     res.send(`<h1>false a.html</h1>`)
