@@ -105,7 +105,7 @@ app.post('/try-uploads', upload.array('photos'), (req, res) => {
 });
 
 // get router params;
-app.get('/my-params1/:action/:id', (req, res) => {
+app.get('/my-params1/:action?/:id?', (req, res) => {
   res.json(req.params);
 });
 
