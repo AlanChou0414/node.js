@@ -96,7 +96,7 @@ app.post('/try-post-form', (req, res) => {
   res.render('try-post-form', req.body);
 });
 // export upload
-app.post('/try-post-form', upload.single('avatar'), (req, res) => {
+app.post('/try-upload', upload.single('avatar'), (req, res) => {
   res.json(req.file);
 });
 /*---------------------------------
