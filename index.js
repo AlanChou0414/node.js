@@ -1,3 +1,4 @@
+// Routes
 // import [dotenv] modules and .env config;
 require('dotenv').config();
 
@@ -80,6 +81,14 @@ app.get('/try-qs', (req, res) => {
 app.post(['/try-post', '/try-post2'], (req, res) => {
   // body-parser
   res.json(req.body);
+});
+
+app.get('/try-post-form', (req, res) => {
+  res.render('try-post-form');
+});
+app.post('/try-post-form', (req, res) => {
+  // res.render(req.body);
+  res.render('try-post-form', req.body);
 });
 
 /*---------------------------------
