@@ -4,10 +4,11 @@ require('dotenv').config();
 
 // import [express] modules;
 const express = require('express');
-// import [multer] nodules;
+// import [multer] modules;
 const multer = require('multer');
 
-const upload = multer({ dest: 'upload_tmp/' });
+// const upload = multer({ dest: 'upload_tmp/' });
+const upload = require('./modules/upload-img');
 
 // use express;
 const app = express();

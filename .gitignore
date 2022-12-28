@@ -3,6 +3,7 @@
 /dist
 /.pnp
 upload_tmp/
+/public/uploads
 .pnp.js
 # testing
 /coverage
