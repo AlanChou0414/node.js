@@ -6,6 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 const extMap = {
   'image/jpeg': '.jpg',
   'image/png': '.png',
+  'image/webp': '.webp',
 };
 
 // use multer function

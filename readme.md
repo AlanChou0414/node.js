@@ -1,37 +1,22 @@
 process
-=> 行程
+  行程
 
 thread
-=> 執行緒
+  執行緒
 
-output frondend
-=> {
-    res.send,
-    res.add,
-    res.use
-}
+-------------------------
+輸出給前端
+  res.end()
+  res.send()
+  res.render()
+  res.json()
+-------------------------
+前端傳入的資料
+  req.query  // 取得 query string parameters
+  req.body   // 表單資料
+  req.file   // 上傳單一檔案時
+  req.files   // 上傳多個檔案時
 
-package.json
-=> {
-    "start" : "file location",
-        => npm start 
-    "dev" : "file location",
-        => npm run dev
-}
 
-npm i 
-=> download all project modules
 
-output
-=>{
-    res.end()
-    res.send()
-    res.render()
-    res.json()
-}
-=> {
-    req.query => get query string parameters
-    req.body => get form
-    req.file => upload single file
-    req.files => upload many files
-}
+-------------------------

@@ -103,6 +103,12 @@ app.post('/try-upload', upload.single('avatar'), (req, res) => {
 app.post('/try-uploads', upload.array('photos'), (req, res) => {
   res.json(req.files);
 });
+
+// get router params;
+app.get('/my-params1/:action/:id', (req, res) => {
+  res.json(req.params);
+});
+
 /*---------------------------------
 app.get('/a.html',(req,res) => {
     res.send(`<h1>false a.html</h1>`)
