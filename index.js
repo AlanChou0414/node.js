@@ -15,6 +15,9 @@ app.get('/', (req, res) => {
     res.send(`<h1>Hello</h1>`);
 });
 */
+// Top-level Middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // export .ejs object;
 app.get('/', (req, res) => {
@@ -63,7 +66,7 @@ app.get('/json-sales2', (req, res) => {
     data.sort(handleObj[orderby].sort);
   }
 
-  res.render('json-sales2', { data, handleObj, orderby });
+  res.render('json-sales2', { data, orderby, handleObj });
 });
 
 // req.query() get query string parameters;
@@ -72,9 +75,9 @@ app.get('/try-qs', (req, res) => {
 });
 
 // post
-const urlencodedParser = express.urlencoded({ extended: false });
-const jsonParser = express.json();
-app.post(['/try-post', '/try-post2'], [urlencodedParser, jsonParser], (req, res) => {
+// const urlencodedParser = express.urlencoded({ extended: false });
+// const jsonParser = express.json();
+app.post(['/try-post', '/try-post2'], (req, res) => {
   // body-parser
   res.json(req.body);
 });
