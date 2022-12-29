@@ -5,6 +5,7 @@ require('dotenv').config();
 // import [express] modules;
 const express = require('express');
 // import [multer] modules;
+// eslint-disable-next-line no-unused-vars
 const multer = require('multer');
 // import [express-session] modules;
 const session = require('express-session');
@@ -14,6 +15,8 @@ const moment = require('moment-timezone');
 // import [dayjs] modules;
 const dayjs = require('dayjs');
 const upload = require('./modules/upload-img');
+
+const db = require('./modules/connect-mysql');
 
 // use express;
 const app = express();
@@ -141,6 +144,7 @@ app.use('/admins', require('./routes/admin2'));
 
 app.get('/try-sess', (req, res) => {
   req.session.my_var = req.session.my_var || 0;
+  // eslint-disable-next-line no-plusplus
   req.session.my_var++;
   res.json({
     my_var: req.session.my_var,
@@ -169,6 +173,12 @@ app.get('/try-dayjs', (req, res) => {
   res.json({
     d1a,
   });
+});
+
+app.get('/try-db', async (req, res) => {
+  const [rows] = await db.query('SELECT * FROM categories');
+
+  res.json(rows);
 });
 
 /*---------------------------------
