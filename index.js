@@ -9,6 +9,10 @@ const multer = require('multer');
 // import [express-session] modules;
 const session = require('express-session');
 // const upload = multer({ dest: 'upload_tmp/' });
+// import [moment-timezone] modules;
+const moment = require('moment-timezone');
+// import [dayjs] modules;
+const dayjs = require('dayjs');
 const upload = require('./modules/upload-img');
 
 // use express;
@@ -141,6 +145,29 @@ app.get('/try-sess', (req, res) => {
   res.json({
     my_var: req.session.my_var,
     session: req.session,
+  });
+});
+
+// moment & dayjs modules;
+app.get('/try-moment', (req, res) => {
+  const m1 = moment();
+  const m1a = m1.format('YYYY/MM/DD');
+  const m1b = m1.format('YYYY-MM-DD  HH:mm:ss');
+  const m1c = m1.tz('Asia/Tokyo').format('YYYY-MM-DD  HH:mm:ss');
+
+  res.json({
+    m1a,
+    m1b,
+    m1c,
+  });
+});
+
+app.get('/try-dayjs', (req, res) => {
+  const d1 = dayjs();
+  const d1a = d1.format('YYYY-MM-DD');
+
+  res.json({
+    d1a,
   });
 });
 
