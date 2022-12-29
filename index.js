@@ -43,6 +43,10 @@ app.use(express.json());
 
 app.use((req, res, next) => {
   res.locals.title = 'node.js';
+
+  //
+  res.locals.toDateString = (d) => moment(d).format('YYYY-MM-DD');
+  res.locals.toDateTimeString = (d) => moment(d).format('YYYY-MM-DD HH:mm:ss');
   next();
 });
 

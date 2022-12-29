@@ -1,34 +1,47 @@
-// Router modular;
 const express = require('express');
 const db = require('../modules/connect-mysql');
 
 const router = express.Router();
 
-// eslint-disable-next-line consistent-return
-router.get('/', async (req, res) => {
-  const page = +req.query.page || 1; // which pages does user looking at;
-
+const getListData = async (req, res) => {
+  const page = +req.query.page || 1; // User want to see the pages of the first
   if (page < 1) {
-    return res.redirect(req.baseUrl);
+    // eslint-disable-next-line no-undef
+    return res.redirect(req.baseUrl + trq.url); // Page steering
   }
 
   const perPage = 20;
-  const tSql = 'SELECT COUNT(1) totalRows FROM address_book';
-  const [[{ totalRows }]] = await db.query(tSql);
+  // eslint-disable-next-line camelcase
+  const t_sql = 'SELECT COUNT(1) totalRows FROM address_book';
+  const [[{ totalRows }]] = await db.query(t_sql);
   const totalPages = Math.ceil(totalRows / perPage);
 
   let rows = [];
   if (totalRows > 0) {
     if (page > totalPages) {
-      return res.redirect(`?page=${totalPages}`);
+      return res.redirect(`?page=${totalPages}`); // Page to the last page
     }
-    const sql = `SELECT * FROM address_book ORDER BY sid DESC LIMIT ${(page - 1) * perPage},${perPage}`;
+
+    const sql = `SELECT * FROM address_book ORDER BY sid DESC LIMIT ${
+      (page - 1) * perPage
+    }, ${perPage}`;
+
     [rows] = await db.query(sql);
   }
 
-  res.json({
+  return {
     totalRows, totalPages, page, rows,
-  });
+  };
+};
+
+router.get('/', async (req, res) => {
+  const output = await getListData(req, res);
+  res.render('ab-list', output);
+});
+
+router.get('/api', async (req, res) => {
+  const output = await getListData(req, res);
+  res.json(output);
 });
 
 module.exports = router;
