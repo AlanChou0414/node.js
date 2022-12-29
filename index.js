@@ -175,11 +175,14 @@ app.get('/try-dayjs', (req, res) => {
   });
 });
 
+// connect mySQL
 app.get('/try-db', async (req, res) => {
   const [rows] = await db.query('SELECT * FROM categories');
 
   res.json(rows);
 });
+
+app.use('/address-book', require('./routes/address-book'));
 
 /*---------------------------------
 app.get('/a.html',(req,res) => {
