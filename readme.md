@@ -13,10 +13,13 @@ thread
 
 -------------------------
 前端傳入的資料
-  req.query  // 取得 query string parameters
-  req.body   // 表單資料
-  req.file   // 上傳單一檔案時
+  req.query   // 取得 query string parameters
+  req.params  // 網址列上的參數
+  req.body    // 表單資料
+  req.file    // 上傳單一檔案時
   req.files   // 上傳多個檔案時
+
+  req.session // 使用 express-session 時
 
 -------------------------
 RESTful API 簡略的規則:
@@ -29,4 +32,8 @@ PUT    /product/:pid   # 修改資料
 DELETE /product/:pid   # 刪除資料
 
 -------------------------
+
+
+
+
 

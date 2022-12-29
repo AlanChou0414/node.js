@@ -6,7 +6,8 @@ require('dotenv').config();
 const express = require('express');
 // import [multer] modules;
 const multer = require('multer');
-
+// import [express-session] modules;
+const session = require('express-session');
 // const upload = multer({ dest: 'upload_tmp/' });
 const upload = require('./modules/upload-img');
 
@@ -22,6 +23,14 @@ app.get('/', (req, res) => {
 });
 */
 // Top-level Middleware
+app.use(session({
+  saveUninitialized: false,
+  resave: false,
+  secret: '92qjfioapjsidj29083r20qjfalr3q',
+  cookie: {
+    maxAge: 1200_000,
+  },
+}));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -125,6 +134,15 @@ app.get(/\/m\/09\d{2}-?\d{3}-?\d{3}$/i, (req, res) => {
 
 // app.use(require('./routes/admin2'));
 app.use('/admins', require('./routes/admin2'));
+
+app.get('/try-sess', (req, res) => {
+  req.session.my_var = req.session.my_var || 0;
+  req.session.my_var++;
+  res.json({
+    my_var: req.session.my_var,
+    session: req.session,
+  });
+});
 
 /*---------------------------------
 app.get('/a.html',(req,res) => {
