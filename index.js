@@ -25,6 +25,11 @@ app.get('/', (req, res) => {
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.locals.title = 'node.js';
+  next();
+});
+
 // export .ejs object;
 app.get('/', (req, res) => {
   res.render('main', { sayHello: 'Hello Alan, Nice to see you!' });
@@ -45,6 +50,7 @@ app.get('/json-sales', (req, res) => {
 
 // output object to json-sales2.ejs;
 app.get('/json-sales2', (req, res) => {
+  res.locals.title = res.locals.title ? (`TEST - ${res.locals.title}`) : 'TEST';
   // eslint-disable-next-line import/no-dynamic-require, global-require
   const data = require(`${__dirname}/data/sales.json`);
   const { orderby } = req.query;
