@@ -117,6 +117,8 @@ app.get(/\/m\/09\d{2}-?\d{3}-?\d{3}$/i, (req, res) => {
   res.send({ u });
 });
 
+app.use(require('./routes/admin2'));
+
 /*---------------------------------
 app.get('/a.html',(req,res) => {
     res.send(`<h1>false a.html</h1>`)
