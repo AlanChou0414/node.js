@@ -85,4 +85,21 @@ router.post('/add', upload.none(), async (req, res) => {
   // res.render("ab-list", output);
 });
 
+router.delete('/:sid', async (req, res) => {
+  const output = {
+    success: false,
+    error: '',
+  };
+  const sid = +req.params.sid || 0;
+  if (!sid) {
+    output.error = 'No sid!';
+    return res.json(output);
+  }
+  const sql = 'DELETE FROM `address_book` WHERE sid=?';
+  const [result] = await db.query(sql, [sid]);
+  output.success = !!result.affectedRows;
+
+  res.json(output);
+});
+
 module.exports = router;
