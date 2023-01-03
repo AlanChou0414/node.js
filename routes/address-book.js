@@ -22,8 +22,7 @@ const getListData = async (req, res) => {
       return res.redirect(`?page=${totalPages}`); // Page to the last page
     }
 
-    const sql = `SELECT * FROM address_book ORDER BY sid DESC LIMIT ${
-      (page - 1) * perPage
+    const sql = `SELECT * FROM address_book ORDER BY sid DESC LIMIT ${(page - 1) * perPage
     }, ${perPage}`;
 
     [rows] = await db.query(sql);
@@ -41,6 +40,11 @@ router.get('/', async (req, res) => {
 
 router.get('/api', async (req, res) => {
   const output = await getListData(req, res);
+  // for (let item of output.rows) {
+  //   item.birthday2 = res.locals.toDateString(item.birthday);
+  // item.birthday = res.locals.toDateString(item.birthday);
+  // }
+  // TODO: 用 output.rows.forEach() 再寫一次功能
   res.json(output);
 });
 
