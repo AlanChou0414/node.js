@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('../modules/connect-mysql');
+const upload = require('../modules/upload-img');
 
 const router = express.Router();
 
@@ -51,8 +52,25 @@ router.get('/api', async (req, res) => {
 router.get('/add', async (req, res) => {
   res.render('ab-add');
 });
-router.post('/add', async (req, res) => {
-  res.send('ok');
+router.post('/add', upload.none(), async (req, res) => {
+  const output = {
+    success: false,
+    postData: req.body,
+    code: 0,
+    errors: {},
+  };
+
+  const {
+    name, email, mobile, birthday, address,
+  } = req.body;
+
+  // TODO: check data
+  const sql = 'INSERT INTO `address_book`(`name`, `email`, `mobile`, `birthday`, `address`,created_at) VALUES (?,?,?,?,?,NOW())';
+
+  const [result] = await db.query(sql, [name, email, mobile, birthday, address]);
+
+  output.result = result;
+  res.json(output);
   // res.render("ab-list", output);
 });
 

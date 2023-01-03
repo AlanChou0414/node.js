@@ -1,12 +1,11 @@
 <%- include('parts/html-head') %> <%- include('parts/navbar') %>
-
         <div class="container">
             <div class="row">
                 <div class="col-6">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">新增資料</h5>
-                            <form>
+                            <form name="form1" onsubmit="postForm(event)">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">姓名</label>
                                     <input type="text" class="form-control" id="name" name="name" />
@@ -44,7 +43,6 @@
             </div>
         </div>
         <%- include('parts/script') %> <%- include('parts/html-foot') %>
-
                 <script>
                     function postForm(event) {
                         event.preventDefault();
@@ -59,14 +57,6 @@
                             .then(data => {
                                 console.log(data);
                             });
-
-
-
-
-
                     }
-
-
                 </script>
-
-                <%- include('parts/html-foot') %>
+        <%- include('parts/html-foot') %>
