@@ -17,11 +17,11 @@ const dayjs = require('dayjs');
 const upload = require('./modules/upload-img');
 
 const db = require('./modules/connect-mysql');
-
 // use express;
 const app = express();
 // import ejs engine;
 app.set('view engine', 'ejs');
+app.use(require('cors')());
 
 // set routes;
 /*

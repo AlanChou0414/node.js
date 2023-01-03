@@ -35,7 +35,7 @@
         <ul class="pagination">
           ${Array(11).fill(1).map((v, i) => {
                 const p = obj.page - 5 + i;
-                if (p < 1 || p > obj.totalPages) return '';  // 頁碼超出範圍
+                if (p < 1 || p > obj.totalPages) return '';  
 
                 return `<li class="page-item ${p === obj.page ? 'active' : ''}">
             <a class="page-link" href="?page=${p}">${p}</a>
