@@ -9,6 +9,7 @@ const express = require('express');
 const multer = require('multer');
 // import [express-session] modules;
 const session = require('express-session');
+const MysqlStore = require('express-mysql-session')(session);
 // const upload = multer({ dest: 'upload_tmp/' });
 // import [moment-timezone] modules;
 const moment = require('moment-timezone');
@@ -17,6 +18,8 @@ const dayjs = require('dayjs');
 const upload = require('./modules/upload-img');
 
 const db = require('./modules/connect-mysql');
+
+const sessionStore = new MysqlStore({}, db);
 // use express;
 const app = express();
 // import ejs engine;
@@ -33,6 +36,7 @@ app.get('/', (req, res) => {
 app.use(session({
   saveUninitialized: false,
   resave: false,
+  store: sessionStore,
   secret: '92qjfioapjsidj29083r20qjfalr3q',
   cookie: {
     maxAge: 1200_000,
