@@ -4,6 +4,14 @@ const upload = require('../modules/upload-img');
 
 const router = express.Router();
 
+router.use((req, res, next) => {
+  const { url, baseUrl, originalUrl } = req;
+  res.locals = {
+    ...res.locals, url, baseUrl, originalUrl,
+  };
+  next();
+});
+
 const getListData = async (req, res) => {
   const page = +req.query.page || 1; // User want to see the pages of the first
   if (page < 1) {

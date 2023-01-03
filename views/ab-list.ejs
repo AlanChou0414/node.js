@@ -38,7 +38,7 @@
               <% for(let r of rows){ %>
                 <tr>
                   <td>
-                    <a href="#">
+                    <a href="javascript:deleteItem(<%= r.sid %> )">
                       <i class="fa-solid fa-trash"></i>
                     </a>
                   </td>
@@ -61,7 +61,7 @@
                     <%= r.address %>
                   </td>
                   <td>
-                    <a href="/address-book/edit?sid=<%= r.sid %>">
+                    <a href="<%= baseUrl %>/edit?sid=<%= r.sid %>">
                       <i class="fa-solid fa-file-pen"></i>
                     </a>
                   </td>
@@ -74,4 +74,25 @@
     </div>
 
     <%- include('parts/script') %>
+
+      <script>
+        function deleteItem(sid) {
+          if (!confirm(`Are you sure you want to delete data No.${sid} ?`)) {
+            return;
+          }
+
+          fetch(`<%= baseUrl %>/${sid}`, {
+            method: 'DELETE'
+          })
+            .then(res => res.json())
+            .then(data => {
+              console.log(data);
+              if (data.success) {
+                location.reload();
+              } else {
+                alert('error');
+              };
+            });
+        }
+      </script>
       <%- include('parts/html-foot') %>
