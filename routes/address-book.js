@@ -48,4 +48,12 @@ router.get('/api', async (req, res) => {
   res.json(output);
 });
 
+router.get('/add', async (req, res) => {
+  res.render('ab-add');
+});
+router.post('/add', async (req, res) => {
+  res.send('ok');
+  // res.render("ab-list", output);
+});
+
 module.exports = router;
