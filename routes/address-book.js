@@ -59,17 +59,28 @@ router.post('/add', upload.none(), async (req, res) => {
     code: 0,
     errors: {},
   };
-
   const {
     name, email, mobile, birthday, address,
   } = req.body;
 
-  // TODO: check data
-  const sql = 'INSERT INTO `address_book`(`name`, `email`, `mobile`, `birthday`, `address`,created_at) VALUES (?,?,?,?,?,NOW())';
+  if (!name || name.length < 2) {
+    output.errors.name = '請輸入正確的姓名';
+    return res.json(output);
+  }
+  const sql = 'INSERT INTO `address_book`(`name`, `email`, `mobile`, `birthday`, `address`, `created_at`) VALUES (?, ?, ?, ?, ?, NOW())';
 
-  const [result] = await db.query(sql, [name, email, mobile, birthday, address]);
+  const [result] = await db.query(sql, [
+    name,
+    email,
+    mobile,
+    birthday,
+    address,
+  ]);
 
   output.result = result;
+  output.success = !!result.affectedRows;
+
+  // affectedRows
   res.json(output);
   // res.render("ab-list", output);
 });
