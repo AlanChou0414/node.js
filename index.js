@@ -7,6 +7,7 @@ const express = require('express');
 // import [multer] modules;
 // eslint-disable-next-line no-unused-vars
 const multer = require('multer');
+const bcrypt = require('bcryptjs');
 // import [express-session] modules;
 const session = require('express-session');
 const MysqlStore = require('express-mysql-session')(session);
@@ -196,6 +197,19 @@ app.get('/try-db', async (req, res) => {
   const [rows] = await db.query('SELECT * FROM categories');
 
   res.json(rows);
+});
+
+app.get('/add-member', async (req, res) => {
+  const sql = "INSERT INTO `members`(`email`, `password`, `hash`, `nickname`, `create_at`) VALUES (?, ?, '', '小美', NOW())";
+
+  const password = await bcrypt.hash('123456', 10);
+
+  const [result] = await db.query(sql, [
+    'shin@test.com',
+    password,
+  ]);
+
+  res.json(result);
 });
 
 app.use('/address-book', require('./routes/address-book'));
