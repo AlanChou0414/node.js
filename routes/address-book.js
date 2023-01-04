@@ -93,6 +93,27 @@ router.post('/add', upload.none(), async (req, res) => {
   // res.render("ab-list", output);
 });
 
+router.get('/edit/:sid', async (req, res) => {
+  const sid = +req.params.sid || 0;
+  if (!sid) {
+    return res.redirect(req.baseUrl);
+  }
+
+  const sql = 'SELECT * FROM `address_book` WHERE sid=?';
+  const [rows] = await db.query(sql, [sid]);
+  if (rows.length < 1) {
+    return res.redirect(req.baseUrl);
+  }
+  const row = rows[0];
+  res.json(row);
+
+  // res.render('ab-edit', { row });
+});
+
+router.put('/edit/:sid', async (req, res) => {
+
+});
+
 router.delete('/:sid', async (req, res) => {
   const output = {
     success: false,
