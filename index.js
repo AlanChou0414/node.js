@@ -199,17 +199,23 @@ app.get('/try-db', async (req, res) => {
   res.json(rows);
 });
 
-app.get('/add-member', async (req, res) => {
-  const sql = "INSERT INTO `members`(`email`, `password`, `hash`, `nickname`, `create_at`) VALUES (?, ?, '', '小美', NOW())";
+app.get('/add-member', async (req, res) => res.json({}),
+  // const sql = "INSERT INTO `members`(`email`, `password`, `hash`, `nickname`, `create_at`) VALUES (?, ?, '', '小美', NOW())";
 
-  const password = await bcrypt.hash('123456', 10);
+  // const password = await bcrypt.hash('123456', 10);
 
-  const [result] = await db.query(sql, [
-    'shin@test.com',
-    password,
-  ]);
+  // const [result] = await db.query(sql, [
+  //   'shin@test.com',
+  //   password,
+  // ]);
 
-  res.json(result);
+  // res.json(result);
+);
+app.get('/login', async (req, res) => res.render('login'));
+app.post('/login', async (req, res) => res.json({}));
+app.get('/logout', async (req, res) => {
+  delete req.session.user;
+  return res.redirect('/');
 });
 
 app.use('/address-book', require('./routes/address-book'));
